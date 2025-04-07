@@ -331,35 +331,7 @@ void WP_InitForcePowers( gentity_t *ent ) {
 		i_r++;
 	}
 	//THE POWERS
-/*
-	qboolean allowFullForceDuel = ( ent->client->ps.duelInProgress && ent->client->engage_FullForceDuel );
 
-	if ( g_forcePowerDisableFFA.integer && !allowFullForceDuel ) {
-    	// Disable all force powers except Jump (FP_LEVITATION), Saber Attack (FP_SABER_OFFENSE), and Saber Defend (FP_SABER_DEFENSE)
-    		for ( int i = 0; i < NUM_FORCE_POWERS; i++ ) {
-        		if ( i != FP_LEVITATION && i != FP_SABER_OFFENSE && i != FP_SABER_DEFENSE ) {
-            		ent->client->ps.fd.forcePowerLevel[i] = 0;
-            		ent->client->ps.fd.forcePowersKnown &= ~(1 << i);
-        	}
-    	}
-    			gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FORCE_DISABLE );
-    			te->r.svFlags |= SVF_BROADCAST;
-    			te->s.eventParm = 1;
-		} 
-		else if ( allowFullForceDuel ) {
-    	// In a full-force duel: explicitly enable force powers.
-    			gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FORCE_DISABLE );
-    			te->r.svFlags |= SVF_BROADCAST;
-    		te->s.eventParm = 0;
-		} 
-		else {
-    	// Otherwise, fall back to the normal behavior.
-    			gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FORCE_DISABLE );
-    			te->r.svFlags |= SVF_BROADCAST;
-    			te->s.eventParm = ( g_forcePowerDisable.integer ) ? 1 : 0;
-
-	}
-*/
 	// Determine if a full-force duel is active using the server-only flag
 	qboolean allowFullForceDuel = ( ent->client->ps.duelInProgress && ent->client->engage_FullForceDuel );
 
@@ -796,9 +768,6 @@ qboolean WP_ForcePowerUsable( gentity_t *self, forcePowers_t forcePower )
 	{
 		return qfalse;
 	}
-/*	if (!self->client->ps.duelInProgress && (g_forcePowerDisableFFA.integer & (1<<forcePower))) {
-		return qfalse;//If we are not in a duel, and FFA power cvar disables it, return qfalse
-	}*/ 
 	if (!BG_CanUseFPNow(level.gametype, &self->client->ps, level.time, forcePower))
 	{
 		return qfalse;
