@@ -19,6 +19,10 @@
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9" CACHE STRING "Minimum OS X deployment version")
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 set(InOpenJK ON)
 
 set(ProjectName "TaystJK" CACHE STRING "Project Name")
@@ -209,9 +213,13 @@ if(MSVC)
 	set(SharedDefines ${SharedDefines} "_SCL_SECURE_NO_WARNINGS")
 	set(SharedDefines ${SharedDefines} "_CRT_NONSTDC_NO_DEPRECATE")
 
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /EHsc")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fp:strict")
+
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fp:strict")
 
 	# Warnings
 	# 4244 = conversion' conversion from 'type1' to 'type2', possible loss of data
@@ -283,6 +291,8 @@ elseif (("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU") OR ("${CMAKE_C_COMPILER_ID}" M
 			# -ioquake3 Makefile
 			set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mstackrealign")
 			set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mfpmath=sse")
+                        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fexcess-precision=standard")
+                        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -frounding-math")
 		endif()
 
 		if(WIN32)
@@ -306,6 +316,8 @@ elseif (("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU") OR ("${CMAKE_C_COMPILER_ID}" M
 		if (X86)
 			set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mstackrealign")
 			set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfpmath=sse")
+                        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexcess-precision=standard")
+                        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frounding-math")
 		endif()
 	elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")

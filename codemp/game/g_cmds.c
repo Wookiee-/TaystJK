@@ -4338,10 +4338,14 @@ void Cmd_EngageDuel_f(gentity_t *ent, int dueltype)//JAPRO - Serverside - Fullfo
 				case	1://FF Duel
 					G_AddEvent(ent, EV_PRIVATE_DUEL, 2);
 					G_AddEvent(challenged, EV_PRIVATE_DUEL, 2);
+					ent->client->engage_FullForceDuel = qtrue;
+					challenged->client->engage_FullForceDuel = qtrue;
 					if (g_eloRanking.integer && ent->client->pers.userName[0] && challenged->client->pers.userName[0])
 						trap->SendServerCommand(-1, va("print \"%s^7 %s %s^7! (Force) [Ranked]\n\"", challenged->client->pers.netname, G_GetStringEdString("MP_SVGAME", "PLDUELACCEPT"), ent->client->pers.netname) );
 					else
 						trap->SendServerCommand(-1, va("print \"%s^7 %s %s^7! (Force)\n\"", challenged->client->pers.netname, G_GetStringEdString("MP_SVGAME", "PLDUELACCEPT"), ent->client->pers.netname) );
+                                        WP_InitForcePowers(ent);
+                                        WP_InitForcePowers(challenged);
 					break;
 				default://Gun duel
 					G_AddEvent(ent, EV_PRIVATE_DUEL, dueltypes[ent->client->ps.clientNum]);

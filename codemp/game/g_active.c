@@ -4447,6 +4447,12 @@ void ClientThink_real( gentity_t *ent ) {
 			ent->client->ps.duelInProgress = qfalse;
 			duelAgainst->client->ps.duelInProgress = qfalse;
 
+			ent->client->engage_FullForceDuel = qfalse;
+    			duelAgainst->client->engage_FullForceDuel = qfalse;
+
+			WP_InitForcePowers(ent);
+    			WP_InitForcePowers(duelAgainst);
+
 			G_AddEvent(ent, EV_PRIVATE_DUEL, 0);
 			G_AddEvent(duelAgainst, EV_PRIVATE_DUEL, 0);
 

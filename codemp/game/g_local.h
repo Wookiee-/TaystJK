@@ -664,6 +664,7 @@ struct gentity_s {
 	qboolean    spawnedBefore; //japro pushpullitems
 	qboolean	raceModeShooter;
 
+
 	// OpenJK add
 	int			useDebounceTime;	// for cultist_destroyer
 	qboolean	isLogical;		// Determines if this ent is logical or not
@@ -1212,6 +1213,7 @@ struct gclient_s {
 	int			specificWeaponTime[MAX_WEAPONS];
 	int			activeCapRouteSequence;
 	//int			numStakes;
+	qboolean 	engage_FullForceDuel;
 
 #if _GRAPPLE
 	qboolean hookHasBeenFired;
