@@ -372,19 +372,7 @@ void WP_InitForcePowers( gentity_t *ent ) {
 			te->s.eventParm = 0;
 		}
 	}
-/*
-		if ( g_forcePowerDisable.integer ) {
-			gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FORCE_DISABLE );
-			te->r.svFlags |= SVF_BROADCAST;
-			te->s.eventParm = 1;
-		}
-		else {
-			gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FORCE_DISABLE );
-			te->r.svFlags |= SVF_BROADCAST;
-			te->s.eventParm = 0;
-		}
-	}
-*/
+
 	if ( ent->s.eType == ET_NPC )
 		ent->client->sess.setForce = qtrue;
 	else if ( level.gametype == GT_SIEGE ) {
